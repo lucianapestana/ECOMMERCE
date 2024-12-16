@@ -24,7 +24,9 @@ builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 #region [ Repositories ]
 
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IFaturamentoRepository, FaturamentoRepository>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 #endregion [ Repositories ]
