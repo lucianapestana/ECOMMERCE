@@ -4,6 +4,6 @@ namespace ECOMMERCE.API.Repository.Interfaces
 {
     public interface IPedidoRepository
     {
-        Task<bool> AdicionarPedidoItens(PedidoItemDTO pedidoItem);
+        Task<FaturamentoDTO> AdicionarPedidoItens(PedidoItemDTO pedidoItem);
     }
 }

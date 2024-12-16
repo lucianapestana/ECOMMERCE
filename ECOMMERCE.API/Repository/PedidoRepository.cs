@@ -10,10 +10,12 @@ namespace ECOMMERCE.API.Repository
     {
         private readonly EcommerceContext _context = _context;
 
-        public async Task<bool> AdicionarPedidoItens(PedidoItemDTO pedidoItem)
+        public async Task<FaturamentoDTO> AdicionarPedidoItens(PedidoItemDTO pedidoItem)
         {
             using (var transaction = _context.Database.BeginTransactionAsync())
             {
+                var faturamento = new FaturamentoDTO();
+
                 try
                 {
                     var pedido = new TB_PEDIDOS
@@ -28,13 +30,16 @@ namespace ECOMMERCE.API.Repository
                     _context.TB_PEDIDOS.Add(pedido);
                     await _context.SaveChangesAsync();
 
-                    int pedidoId = pedido.PEDIDO_ID;
+                    faturamento.PedidoId = pedido.PEDIDO_ID;
 
                     foreach (var item in pedidoItem.Itens)
                     {
+                        var valorItem = (item.Quantidade * item.PrecoUnitario);
+                        faturamento.SubTotal += valorItem;
+
                         var itemPedido = new TB_ITENS_PEDIDO
                         {
-                            PEDIDO_ID = pedidoId,
+                            PEDIDO_ID = pedido.PEDIDO_ID,
                             PRODUTO_ID = item.ProdutoId,
                             DESCRICAO = item.Descricao,
                             QUANTIDADE = item.Quantidade,
@@ -45,12 +50,12 @@ namespace ECOMMERCE.API.Repository
                     }
                     
                     await transaction.Result.CommitAsync();
-                    return true;
+                    return faturamento;
                 }
                 catch (Exception)
                 {
                     await transaction.Result.RollbackAsync();
-                    return false;
+                    return faturamento;
                 }
             }
         }
