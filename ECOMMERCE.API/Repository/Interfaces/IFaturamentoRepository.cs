@@ -1,0 +1,9 @@
+﻿using ECOMMERCE.API.Models.DTO;
+
+namespace ECOMMERCE.API.Repository.Interfaces
+{
+    public interface IFaturamentoRepository
+    {
+        Task<bool> AdicionarFaturamentoVenda(FaturamentoDTO dto);
+    }
+}
