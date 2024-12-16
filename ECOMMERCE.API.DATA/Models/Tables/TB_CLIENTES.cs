@@ -27,6 +27,6 @@ namespace ECOMMERCE.API.DATA.Models.Tables
         [Unicode(false)]
         public required string CPF { get; set; }
 
-        public int CATEGORIA_ID { get; set; }
+        public int? CATEGORIA_ID { get; set; }
     }
 }

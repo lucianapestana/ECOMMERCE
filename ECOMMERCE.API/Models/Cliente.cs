@@ -18,6 +18,6 @@
 
         public required string Cpf { get; set; }
 
-        public int CategoriaId { get; set; }
+        public int? CategoriaId { get; set; }
     }
 }

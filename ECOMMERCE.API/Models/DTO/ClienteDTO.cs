@@ -20,7 +20,6 @@ namespace ECOMMERCE.API.Models.DTO
         [MaxLength(20, ErrorMessage = "Limite da propriedade {0} ultrapassa o valor máximo de {1} caracteres.")]
         public required string? Cpf { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         public int? Categoria { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace ECOMMERCE.API.Repository
                     DATA_INSERCAO = DateTime.Now,
                     NOME = dto.Nome,
                     CPF = dto.Cpf,
-                    CATEGORIA_ID = dto.Categoria.Value
+                    CATEGORIA_ID = dto.Categoria
                 };
 
                 _context.TB_CLIENTES.Add(cliente);
@@ -48,7 +48,7 @@ namespace ECOMMERCE.API.Repository
                     clienteExistente.DATA_ATUALIZACAO = DateTime.Now;
                     clienteExistente.NOME = dto.Nome;
                     clienteExistente.CPF = dto.Cpf;
-                    clienteExistente.CATEGORIA_ID = dto.Categoria.Value;
+                    clienteExistente.CATEGORIA_ID = dto.Categoria;
                     
                     await _context.SaveChangesAsync();
                     return true;
