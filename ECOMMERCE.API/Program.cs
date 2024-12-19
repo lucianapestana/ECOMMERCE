@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using ECOMMERCE.API.DATA.Context;
 using ECOMMERCE.API.Repository;
 using ECOMMERCE.API.Repository.Interfaces;
@@ -8,16 +9,23 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do banco de dados SQL Server
 builder.Services.AddDbContext<EcommerceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configuração de dependências
 builder.Services.AddControllers();
+
+builder.Services.AddHttpClient<FaturamentoService>(client =>
+{
+    client.BaseAddress = new Uri("https://sti3-faturamento.azurewebsites.net");
+    client.Timeout = TimeSpan.FromSeconds(30);
+    client.DefaultRequestHeaders.Accept.Clear();
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+});
 
 #region [ Services ]
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IFaturamentoService, FaturamentoService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 #endregion [ Services ]
@@ -32,7 +40,6 @@ builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 #endregion [ Repositories ]
 
-// Configuração do Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -50,7 +57,6 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Middleware do Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -64,7 +70,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseAuthorization();
 
-// Mapear os controllers
 app.MapControllers();
 
 app.Run();
