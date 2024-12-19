@@ -1,4 +1,5 @@
-﻿using ECOMMERCE.API.Models.DTO;
+﻿using ECOMMERCE.API.Models;
+using ECOMMERCE.API.Models.DTO;
 
 namespace ECOMMERCE.API.Repository.Interfaces
 {
@@ -8,6 +9,8 @@ namespace ECOMMERCE.API.Repository.Interfaces
 
         Task<bool> AtualizarItemPedido(ItemPedidoDTO dto);
 
-        Task<bool> RemoverItemPedido(int itemPedidoId);
+        Task<bool> RemoverItemPedido(string pedidoId);
+
+        Task<List<ItensPedido>> ObterTodos(string? pedidoId = null);
     }
 }
