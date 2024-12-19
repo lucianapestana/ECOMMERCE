@@ -4,7 +4,7 @@
     {
         public int? FaturamentoId { get; set; }
 
-        public int PedidoId { get; set; }
+        public string? PedidoId { get; set; }
         
         public decimal SubTotal { get; set; }
 

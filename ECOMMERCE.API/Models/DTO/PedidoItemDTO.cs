@@ -2,12 +2,14 @@
 {
     public class PedidoItemDTO
     {
-        public required string Identificador { get; set; }
+        public string? Identificador { get; set; }
         
-        public DateTime DataVenda { get; set; }
+        public DateTime? DataVenda { get; set; }
+
+        public int? StatusPedido { get; set; }
         
-        public required ClienteDTO Cliente { get; set; }
+        public ClienteDTO? Cliente { get; set; }
         
-        public required List<ItemPedidoDTO> Itens { get; set; }
+        public List<ItemPedidoDTO>? Itens { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     {
         public int ItemPedidoId { get; set; }
 
-        public int PedidoId { get; set; }
+        public string? PedidoId { get; set; }
 
         public int ProdutoId { get; set; }
 

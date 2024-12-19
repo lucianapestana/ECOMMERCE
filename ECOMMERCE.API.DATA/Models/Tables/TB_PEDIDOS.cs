@@ -5,7 +5,8 @@ namespace ECOMMERCE.API.DATA.Models.Tables
     public partial class TB_PEDIDOS
     {
         [Key]
-        public int PEDIDO_ID { get; set; }
+        [StringLength(100)]
+        public required string PEDIDO_ID { get; set; }
 
         public int USUARIO_INSERCAO_ID { get; set; }
 

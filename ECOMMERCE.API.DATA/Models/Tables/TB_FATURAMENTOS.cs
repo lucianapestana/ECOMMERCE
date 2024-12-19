@@ -8,7 +8,7 @@ namespace ECOMMERCE.API.DATA.Models.Tables
         [Key]
         public int FATURAMENTO_ID { get; set; }
 
-        public int PEDIDO_ID { get; set; }
+        public required string PEDIDO_ID { get; set; }
 
         [Column(TypeName = "NUMERIC(15, 2)")]
         public decimal SUB_TOTAL { get; set; }

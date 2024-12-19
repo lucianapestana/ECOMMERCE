@@ -7,7 +7,7 @@ namespace ECOMMERCE.API.DATA.Models.Tables
         [Key]
         public int ITEM_PEDIDO_ID { get; set; }
 
-        public int PEDIDO_ID { get; set; }
+        public required string PEDIDO_ID { get; set; }
 
         public int PRODUTO_ID { get; set; }
 
