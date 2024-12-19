@@ -29,5 +29,30 @@ namespace ECOMMERCE.API.Repository
                 throw new Exception("Ocorreu um erro ao salvar o registro", ex);
             }
         }
+
+        public async Task<bool> AtualizarFaturamento(FaturamentoDTO dto)
+        {
+            try
+            {
+                var faturamentoExistente = _context.TB_FATURAMENTOS.Find(dto.FaturamentoId);
+
+                if (faturamentoExistente != null)
+                {
+                    faturamentoExistente.PEDIDO_ID = dto.PedidoId;
+                    faturamentoExistente.SUB_TOTAL = dto.SubTotal;
+                    faturamentoExistente.DESCONTOS = dto.Descontos;
+                    faturamentoExistente.VALOR_TOTAL = dto.ValorTotal;
+
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao salvar o registro", ex);
+            }
+        }
     }
 }
