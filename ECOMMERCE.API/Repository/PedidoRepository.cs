@@ -73,8 +73,8 @@ namespace ECOMMERCE.API.Repository
                 {
                     pedidoExistente.USUARIO_ATUALIZACAO_ID = 1;
                     pedidoExistente.DATA_ATUALIZACAO = DateTime.Now;
-                    pedidoExistente.DATA_VENDA = dto.DataVenda;
-                    pedidoExistente.CLIENTE_ID = dto.ClienteId ?? string.Empty;
+                    pedidoExistente.DATA_VENDA = dto.DataVenda == default ?  pedidoExistente.DATA_VENDA : dto.DataVenda;
+                    pedidoExistente.CLIENTE_ID = string.IsNullOrEmpty(dto.ClienteId) ? pedidoExistente.CLIENTE_ID : dto.ClienteId;
                     pedidoExistente.STATUS_PEDIDO_ID = dto.StatusPedidoId;
 
                     await _context.SaveChangesAsync();
